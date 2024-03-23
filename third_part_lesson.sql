@@ -27,14 +27,11 @@ SELECT department_name, location_id FROM departments WHERE location_id NOT IN(17
 //7-AND
 //8-OR
 
-
+//ogrenildi parantez var gibi dusunuceksin burada 
 ?? anlasilmadi hocaya sor ??
-SELECT last_name|| ' '||salary*1.05 AS "Employee Raise", department_id, first_name FROM employees WHERE department_id IN(50,80) AND first_name LIKE 'C%' OR last_name LIKE '%s%';
+SELECT last_name|| ' '||salary*1.05 AS "Employee Raise", department_id, first_name FROM employees WHERE (department_id IN(50,80) AND first_name LIKE 'C%') OR last_name LIKE '%s%';
 ?? anlasilmadi hocaya sor ??
-SELECT last_name||' '||salary*1.05 
-AS "Employee Raise", department_id , first_name 
-FROM employees 
-WHERE department_id IN(50,80) OR first_name LIKE 'C%' AND last_name LIKE '%s%';
+SELECT last_name||' '||salary*1.05 AS "Employee Raise", department_id , first_name FROM employees WHERE department_id (IN(50,80) OR first_name LIKE 'C%') AND last_name LIKE '%s%';
 
 SELECT last_name||' '||salary*1.05 AS "Employee Raise", department_id, first_name FROM employees 
 WHERE (department_id IN(50,80) OR first_name LIKE 'C%') AND last_name LIKE '%s%';
