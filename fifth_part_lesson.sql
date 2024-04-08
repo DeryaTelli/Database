@@ -115,7 +115,7 @@ fx= karakter degiskeni ile format modeli icin tam eslesmeyi belirtir
 
 //YY=Cureent Year 
 SELECT TO_DATE('27-Oct-95','DD-Mon-YY') AS "DATE" FROM dual;
-//cikti 27-Oct-1995 YY 20 ci yillar anlamina gelir 
+//cikti 27-Oct-2095 YY 20 ci yillar anlamina gelir 
 
 //RR= 19 year 
 SELECT TO_DATE('27-Oct-95','DD-Mon-RR') AS "DATE" FROM dual;

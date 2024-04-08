@@ -57,7 +57,7 @@ SELECT  last_name ,INSTR(last_name,'a') FROM employees;
 
 SELECT LPAD('HelloWorld',15,'-') FROM DUAL;
 //helloworld ifadeisini 15 karakter uzunluguna cikarmak icin - ekleyecektir sol tarafa 
-SELECT LPAD(last_name,10,''*) FROM employees;
+SELECT LPAD(last_name,10,'*') FROM employees;
 //last name ifadelerini 10 karakter uzunluguna cikarmak icin * ekleyecekyir sol taraflarina 
 
 //RPAD(character string,total number of charecter, the charachter to pad with)
@@ -76,7 +76,7 @@ SELECT TRIM(TRAILING 'a' FROM 'abcba') FROM DUAL;
 //abcba ifadesinden sondaki a harfini silecektir 
 SELECT TRIM(BOTH 'a' FROM 'abcba') FROM DUAL;
 //abcba ifadesinden bastaki ve sondaki a harfini silecektir 
-
+  
 
 //REPLACE(string1 , string_to_replace,[replacement_string])
 
