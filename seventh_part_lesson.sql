@@ -24,7 +24,7 @@ equijoin, belirtilen sütunlar için aynı değerlere sahip satırları birleşt
 // department ve employees deki department_idleri ayni onlari
 
 //TABLE ALIASES 
-SELECT last_name , e.job_id , job_title FROM employees e , jobs j WHERE e.job_id=j.job_id AND department_id=80;
+SELECT e.last_name , e.job_id , j.job_title FROM employees e , jobs j WHERE e.job_id=j.job_id AND department_id=80;
 // table aliases ornegi yukaridaki burada aliases yapmistur employees e ve jobs j
 
 //SELECT last_name, employees.job_id, job_title FROM employees e, jobs j WHERE e.job_id=j.job_id AND department_id=80;
@@ -59,13 +59,13 @@ SELECT last_name , e.job_id , job_title FROM employees e , jobs j WHERE e.job_id
 //kullanabilirsin 
 //syntax kurallari
 
-//SELECT table1.column , table2.column FROM taable1 , table2 WHERE table1.column = table2.column(+); 
+//SELECT table1.column , table2.column FROM table1 , table2 WHERE table1.column = table2.column(+); 
 //bu kullanimi left outer join ilede yapabilirsin 
 
-//SELECT table1.column , table2.column FROM taable1 , table2 WHERE table1.column(+)= table2.column; 
+//SELECT table1.column , table2.column FROM table1 , table2 WHERE table1.column(+)= table2.column; 
 //bu kullanimi right outer join ilede yapabilirsin 
 
-//SELECT table1.column , table2.column FROM taable1 , table2 WHERE table1.column(+)= table2.column(+); 
+//SELECT table1.column , table2.column FROM table1 , table2 WHERE table1.column(+)= table2.column(+); 
 //bu kullanimi full outer join ile yapamazsin kullanimin kendiside yanlistir
 
 

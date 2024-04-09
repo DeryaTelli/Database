@@ -22,10 +22,11 @@
 
 //Neden kullaniyoruz??
 //USING CLAUSE (NATURAL JOIN)
+//natural join ile ayni ozellikleri icerir tek var asagidaki ozelliktir 
 //ayni isme sahip farkli veri tutan sutunlari using ile kullanabiliriz 
 
 //SELECT first_name , last_name , department_id, department_name FROM employees JOIN departments USING (department_id);
-//
+//deparment_id ye gore birlesme gereceklesecektir 
 
 using cümlesi, bir veya her iki tablodaki satırları kısıtlamak için where kullanmamıza olanak tanır 
 //SELECT first_name,last_name ,department_id, department_name FROM employees JOIN departments USING (department_id) WHERE last_name='Higgins';
@@ -34,6 +35,7 @@ using cümlesi, bir veya her iki tablodaki satırları kısıtlamak için where 
 //farkli sutun ismi ve ve esit olmayan karsilastirma operatorleri ( < > Between) using join kullanamayiz onun yerine on clause kullanmaliyiz 
 
 //SELECT last_name, job_title FROM employees e JOIN jobs j ON (e.job_id=j.job_id);
+//job_id ye gore birlestirme gerceklestirilmistir 
 ortak sutunlar iki tabloda farkli isimlere sahip ise on clause ile birlestirme yapilabilir bu sekilde 
 yeni isim vermek yerine employees.job_id=jobs.jobs_id diyebiliriz
 
@@ -43,6 +45,8 @@ yeni isim vermek yerine employees.job_id=jobs.jobs_id diyebiliriz
 // On clause with non-equality operator 
 // ayni sutuna sahip degilse kullaniliyor 
 //SELECT last_name, salary, grade_level , lowest_sal , highest_sal FROM employees JOIN job_grades ON (salary BETWEEN lowest_sal AND highest_sal);
+//job grade tablosundaki belirli bir ucret araligina dahil olup olmadigini kontrol eder yani bir calisanin maasi ilgili is derecesinin en dusuk ve yuksek ucret araligina dahil ise 
+//bu calisan ve is derecesi  birlestirme sonucuna dhil edilir 
 
 //Join Three Table Example 
 SELECT last_name ,department_name AS "Department", city FROM employees JOIN departments USING (department_id) JOIN locations USING (location_id);
@@ -52,6 +56,26 @@ SELECT last_name ,department_name AS "Department", city FROM employees JOIN depa
 
 //INNER Join 
 //yalnızca eşleşen satırları döndüren bir veya daha fazla tablonun birleştirilmesine iç birleştirme denir 
+//bir biri ile esit olan  ayni ortak tablodaki verileri dondurecektir asagidaki ornekte daha iyi anlayacaksiniz 
+
+//ikisindede es olan department_id dir 
+
+employee_id | first_name | last_name | department_id
+1           | John       | Doe       | 1
+2           | Jane       | Smith     | 2
+3           | Emily      | Johnson   | 1
+
+department_id | department_name
+1             | Sales
+2             | Marketing
+3             | HR
+
+//inner join ile birlesme sonrasi 
+employee_id | first_name | last_name | department_name
+1           | John       | Doe       | Sales
+2           | Jane       | Smith     | Marketing
+3           | Emily      | Johnson   | Sales
+
 
 
 //OUTER Join
@@ -60,6 +84,8 @@ SELECT last_name ,department_name AS "Department", city FROM employees JOIN depa
 // bu terimler siralama ile ilgilidir 
 
 //LEFT OUTER JOIN 
+//sol tablodaki tum satirlari icerir ve sag tablo ile eslesen satirlari getirir eslesme olmayan sag tablo satirlari icin null deger verir 
+
 //SELECT e.last_name, d.department_id, d.department_name FROM employees e LEFT OUTER JOIN departments d ON(e.department_id=d.department_id);
 //bu sorguda "left outer join " sorgusunun yaninda kalan emoloyees e ifadesine dikkatli baktigimizda tabloda gorunecek en sol sutun tablosu oldugunu gorebilirz 
 // isci ve departman idleri ayni olan isci soy isimlerini departmanin departman idsini ve departman ismini getirecektir isci ve departman siniflarindan 
@@ -70,6 +96,8 @@ SELECT last_name ,department_name AS "Department", city FROM employees JOIN depa
 
 
 //RIGHT OUTER JOIN 
+//sag tablodaki tum satirlari icerir ve sol tablo ile eslesen satirlari getirir eslesme olmayan sol tablo satirlari icin null degerleri kullanir 
+
 //SELECT e.last_name, d.department_id, d.department_name FROM employees e RIGHT OUTER JOIN departments d ON (e.department_id=d.department_id);
 //islerin soy ismi olsada olmasada tum departman idsini ve departman ismini dondurecektir 
 
