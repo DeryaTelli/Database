@@ -143,12 +143,15 @@ ORDER BY e.employee_id;
 //commit ve rollback vererek komutu kilitten cikarabilirler 
 
 12-3 
+//create table 
 CREATE TABLE my_employees(
     hire_date DATE DEFAULT SYSDATE,
     first_name VARCHAR2(15),
     last_name VARCHAR2(15));
 // tablolara degerle eklendiginde acik bir hire_date kalirsa eger ona sysdate eklenecektir 
 
+
+//insert statement 
 INSERT INTO my_employees (hire_date, first_name, last_name)
 VALUES 
 (DEFAULT, 'Angelina', 'Wright');
@@ -160,9 +163,60 @@ VALUES
 ('Angelina','Wright');
 //ortuk sekilde defaul gosterimi 
 
+
+//update statement 
 UPDATE my_employees 
 SET hire_date=DEFAULT 
 WHERE last_name='Wright';
 
+//MERGE 
+iki gorevi ayni anda gerceklestirir 
+ayni anda insert and update yapar ve takma adlar merge deyimi ile kullanilabilir
 
 
+MERGE INTO destination_table USING source_table ON matching-condition 
+WHEN MATCHED THEN UPDATE 
+SET .....
+WHEN NOT MATCHED THEN INSERT 
+VALUES(.....);
+
+MERGE INTO copy_emp c USING employees e 
+ON(c.employee_id=e.employee_id)
+WHEN MATCHED THEN UPDATE 
+SET 
+c.last_name=e.last_name,
+c.department_id=e.department_id
+WHEN NOT MATCHED THEN INSERT 
+VALUES(e.employee_id,e.last_name,e.department_id);
+//merge example idleri esit olan copy_emp ve employees son isimleri ve idleri birbirine esitlemek icin guncellenir 
+ve bunlari eklemek icin asagidaki degerler girilir 
+
+
+//Multi-Table Inserts Syntax 
+INSEERT ALL INTO clause VALUES clause SUBQUERY 
+
+
+INSERT ALL 
+    INTO my_employees
+        VALUES(hire_date,first_name,last_name)
+    INTO copy_my_employees 
+        VALUES(hire_date,first_name,last_name)
+SELECT hire_date, first_name , last_name FROM employees; 
+
+INSERT ALL
+WHEN call format IN ('tlk', 'txt', 'pic') THEN
+INTO all calls
+VALUES (caller id, call timestamp, call duration, call format)
+WHEN call format IN ('tlk', 'txt') THEN
+INTO police record calls
+VALUES (caller id, call timestamp, recipient caller)
+WHEN call duration < 50 AND call type = 'tlk' THEN
+INTO short calls
+VALUES (caller id, call timestamp, call duration)
+WHEN call duration > = 50 AND call type = 'tlk' THEN
+INTO long calls
+VALUES (caller id, call timestamp, call duration)
+SELECT caller id, call timestamp, call duration, call format,
+recipient caller
+FROM calls
+WHERE TRUNC (call timestamp ) = TRUNC (SYSDATE) ;
